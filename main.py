@@ -1,5 +1,4 @@
 import importlib
-import os
 
 print("Exemplo de funcionamento: ")
 print('Ao escolher "numero de variaveis" = 2 e "expressao" = "A.(A+B)" teremos como output a exposição dessa expressao em portas logicas e sua tabela verdade.')
@@ -87,9 +86,6 @@ def recarregar():  # importa uma nova versao do 'rodar.py' respeitando as altera
 
 def escrita():  # apaga o conteudo do 'rodar.py' e o refaz com as informaçoes obtidas nas outras funçoes
     arq = open("rodar.py", "w")
-    arq.write("global bi\n")
-    arq.write("global lista\n")
-    arq.write("\n")
     arq.write("bi = [0, 1]\n")
     arq.write("lista = []\n")
     arq.write("numero = {}\n".format(numero))
