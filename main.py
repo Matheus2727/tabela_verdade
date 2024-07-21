@@ -1,4 +1,5 @@
 import importlib
+import os
 
 print("Exemplo de funcionamento: ")
 print('Ao escolher "numero de variaveis" = 2 e "expressao" = "A.(A+B)" teremos como output a exposição dessa expressao em portas logicas e sua tabela verdade.')
@@ -8,8 +9,12 @@ print("As letras estarão disponíveis dependendo da quantidade de variáveis qu
 print("Por exemplo, para utilizar a letra 'b', é preciso indicar que serão utilizadas pelo menos 2 variáveis, para 'c' pelo menos 3 e assim por diante.")
 print("O minimo de variaveis é 2 e o maximo é 4.")
 print("Maiusculos e minusculos tem o mesmo valor. também podem ser usados os simbolos: [+], [.], [*], [(], [)], ['], [^].")
+print("['] é NOT e [^] é XOR")
 print("")
-            
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
+rodar_path = os.path.join(script_dir, "rodar.py")
+
 def iniciar():  # determina qual caso sera rodado dentro de 'rodar.py'
     global numero
     numero = int(input("quantas variaveis vai usar? "))
@@ -19,11 +24,11 @@ def import_inicial():  # primeira importação de 'rodar.py' pra evitar problema
     try:
         import rodar
         
-    except:
-        arq = open("rodar.py", "w")
+    except ModuleNotFoundError:
+        arq = open(rodar_path, "w")
         arq.close()
         import rodar
-    
+
 def traduzir():  # transforma o input (o qual esta em simbolos) para a logica aceita no python (em formato string) pra ser executado posteriormente
     global tradu_str
     local = []
@@ -85,7 +90,7 @@ def recarregar():  # importa uma nova versao do 'rodar.py' respeitando as altera
     a.rodar()
 
 def escrita():  # apaga o conteudo do 'rodar.py' e o refaz com as informaçoes obtidas nas outras funçoes
-    arq = open("rodar.py", "w")
+    arq = open(rodar_path, "w")
     arq.write("bi = [0, 1]\n")
     arq.write("lista = []\n")
     arq.write("numero = {}\n".format(numero))
